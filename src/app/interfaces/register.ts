@@ -6,5 +6,20 @@ export interface Register {
     confirmPassword: string;
     profileImage?:File;
     status?:boolean;
-   
+}
+export interface Login {
+    email: string;
+    password: string;
+}
+
+export interface User{
+    id: number;
+    username: string;
+    email: string;
+    mobile: string;
+    password: string;
+    profileImage?:File;
+    status?:boolean;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
