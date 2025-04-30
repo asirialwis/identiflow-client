@@ -3,3 +3,30 @@
 
 
 <a routerLink="/user-register">New User? Register</a>
+
+<div class="login-form">
+  <h2>Login Here</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="Enter your email"
+    />
+    <br />
+
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      placeholder="Enter your password"
+    />
+    <br />
+
+    <button type="submit" class="submit-btn">Login</button>
+  </form>
+  <a routerLink="/user-register">New User? Register</a>
+
+</div>
