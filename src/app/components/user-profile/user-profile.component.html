@@ -1,1 +1,14 @@
 <p>user-profile works!</p>
+
+<div class="user-profile">
+  <h2>User Profile</h2>
+  <div class="profile-image">
+    <img [src]="user.profileImage" alt="Profile Image" />
+  </div>
+  <div class="profile-details">
+    <p><strong>Name:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.mobile }}</p>
+    <p><strong>Status:</strong> {{ user.status }}</p>
+    <p><strong>Account Created At:</strong> {{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</p>
+  </div>
