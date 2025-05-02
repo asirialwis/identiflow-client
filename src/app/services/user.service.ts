@@ -44,5 +44,9 @@ export class UserService {
     console.log(id);
     return this.http.put<User>(`http://localhost:8080/api/users/${id}`,data);
   }
+  // updateUserProfile(data:User,id:number):Observable<User>{
+  //   console.log(data);
+  //   return this.http.put<User>(`http://localhost:8080/api/profile/${id}`,data);
+  // }
   
 }
