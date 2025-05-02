@@ -11,6 +11,8 @@ import { UserService } from './services/user.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HomeComponent } from './components/home/home.component';
     UserRegisterComponent,
     UserLoginComponent,
     UserProfileComponent,
-    HomeComponent
+    HomeComponent,
+    UserUpdateComponent,
+    UserDeleteComponent
   ],
   imports: [
     BrowserModule,

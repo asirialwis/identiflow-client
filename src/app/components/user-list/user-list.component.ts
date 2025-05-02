@@ -27,4 +27,18 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  handleUpdate(user: User) {
+    this.userService.updateUser(user , user.id).subscribe({
+      next: (res) => {
+        console.log('User updated:', res);
+        alert('User updated successfully!');
+        this.ngOnInit(); // Refresh the user list
+      },
+      error: (err) => {
+        console.error('Error updating user:', err);
+        alert('Update failed');
+      }
+    });
+  }
+
 }

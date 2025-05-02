@@ -20,6 +20,9 @@
         <td>{{ user.mobile }}</td>
         <td>{{user.status}}</td>
         <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
-       
+        <td>
+            <app-user-update [user]="user"(updated)="handleUpdate($event)"></app-user-update> 
+        </td>
         </tr>
     </tbody>
+</table>    

@@ -17,7 +17,7 @@ export interface User{
     username: string;
     email: string;
     mobile: string;
-    password: string;
+    password?: string;
     profileImage?:File;
     status?:boolean;
     createdAt?: Date;

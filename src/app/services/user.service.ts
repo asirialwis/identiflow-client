@@ -39,5 +39,10 @@ export class UserService {
     const headers = { Authorization : `Bearer ${this.getToken()}` };
     return this.http.get<User>('http://localhost:8080/api/users/profile',{headers});
   }
+
+  updateUser(data:User,id:number):Observable<User>{
+    console.log(id);
+    return this.http.put<User>(`http://localhost:8080/api/users/${id}`,data);
+  }
   
 }
