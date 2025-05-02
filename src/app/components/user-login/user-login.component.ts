@@ -7,18 +7,33 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.css']
+  styleUrls: ['./user-login.component.css'],
 })
 export class UserLoginComponent {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private router:Router, private userService: UserService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required,Validators.minLength(6)]],
     });
   }
-  
+
+  showPassword = false;
+  loading = false;
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    const passwordField = document.getElementById(
+      'password'
+    ) as HTMLInputElement;
+    passwordField.type = this.showPassword ? 'text' : 'password';
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       return;
@@ -30,19 +45,18 @@ export class UserLoginComponent {
       password: formValues.password.trim(),
     };
 
-    console.log("Form data:", formData);
+    console.log('Form data:', formData);
 
     // Call the loginUser method from the UserService
     // and pass the formData to it
     this.userService.loginUser(formData).subscribe({
       next: (res) => {
-        // console.log('User logged in:', res);
+       
         sessionStorage.setItem('token', res.token);
         console.log(sessionStorage.getItem('token'));
         alert('User logged in successfully!');
         this.loginForm.reset();
         this.router.navigate(['/user-profile']);
-
       },
       error: (err) => {
         if (err.status === 401) {
@@ -52,7 +66,7 @@ export class UserLoginComponent {
         } else {
           alert('Server error. Please try again later.');
         }
-      }
+      },
     });
   }
 }

@@ -1,16 +1,19 @@
-<!-- {{title}} -->
-<!-- <app-user-register></app-user-register> -->
-
-
-<nav>
-    <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/user-register">User Register</a></li>
-        <li><a routerLink="/user-login">User Login</a></li>
-        <li><a routerLink="/user-profile">User Profile</a></li>
-        <li><a routerLink="/user-list">User List</a></li>
-    </ul>
-</nav>
-
-
-<router-outlet></router-outlet>
+<!-- Main App Template -->
+<div class="app-container">
+    <nav class="main-nav">
+      <div class="nav-brand">
+        <a routerLink="/" class="brand-link">UserMgmt</a>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item"><a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li class="nav-item"><a routerLink="/user-register" routerLinkActive="active-link">User Register</a></li>
+        <li class="nav-item"><a routerLink="/user-login" routerLinkActive="active-link">User Login</a></li>
+        <li class="nav-item"><a routerLink="/user-profile" routerLinkActive="active-link">User Profile</a></li>
+        <li class="nav-item"><a routerLink="/user-list" routerLinkActive="active-link">User List</a></li>
+      </ul>
+    </nav>
+  
+    <main class="content-wrapper">
+      <router-outlet></router-outlet>
+    </main>
+  </div>

@@ -1,62 +1,135 @@
-<p>user-register works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Create Account</h2>
+      <p>Join our community today</p>
+    </div>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="John Doe"
+          class="form-control"
+          [ngClass]="{ 'invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched }"
+        />
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="validation-error">
+          <span *ngIf="registerForm.get('name')?.errors?.['required']">Name is required</span>
+          <span *ngIf="registerForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</span>
+          <span *ngIf="registerForm.get('name')?.errors?.['maxlength']">Maximum 20 characters allowed</span>
+        </div>
+      </div>
 
-<div class="register-form">
-  <h2>Register Here</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label for="name">User Name</label>
-    <input
-      type="text"
-      id="name"
-      formControlName="name"
-      placeholder="Enter your name"
-    />
-    <br />
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="your.email@example.com"
+          class="form-control"
+          [ngClass]="{ 'invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }"
+        />
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="validation-error">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
 
-    <label for="email">Email</label>
-    <input
-      type="email"
-      id="email"
-      formControlName="email"
-      placeholder="Enter your email"
-    />
-    <br />
+      <!-- Phone Field -->
+      <div class="form-group">
+        <label for="mobile">Phone Number</label>
+        <input
+          type="tel"
+          id="mobile"
+          formControlName="mobile"
+          placeholder="+1 234 567 8900"
+          class="form-control"
+          [ngClass]="{ 'invalid': registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched }"
+        />
+        <div *ngIf="registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched" class="validation-error">
+          <span *ngIf="registerForm.get('mobile')?.errors?.['required']">Phone number is required</span>
+          <span *ngIf="registerForm.get('mobile')?.errors?.['pattern']">Please enter a valid phone number[0-9 numbers]</span>
+        </div>
+      </div>
 
-    <label for="mobile">Phone</label>
-    <input
-      type="text"
-      id="mobile"
-      formControlName="mobile"
-      placeholder="Enter your phone number"
-    />
-    <br />
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input">
+          <input
+            [type]="showPassword.password ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="••••••••"
+            class="form-control"
+            [ngClass]="{ 'invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
+          />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('password')">
+            <i class="material-icons">{{ showPassword.password ? 'visibility_off' : 'visibility' }}</i>
+          </button>
+        </div>
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="validation-error">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">
+            Minimum {{registerForm.get('password')?.errors?.['minlength'].requiredLength}} characters
+          </span>
+        </div>
+      </div>
 
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-      placeholder="Enter your password"
-    />
-    <br />
+      <!-- Confirm Password Field -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input">
+          <input
+            [type]="showPassword.confirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="••••••••"
+            class="form-control"
+            [ngClass]="{ 'invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched }"
+          />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('confirmPassword')">
+            <i class="material-icons">{{ showPassword.confirmPassword ? 'visibility_off' : 'visibility' }}</i>
+          </button>
+        </div>
+        <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="validation-error">
+          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Please confirm your password</span>
+          <span *ngIf="registerForm.errors?.['mismatch']">Passwords don't match</span>
+        </div>
+      </div>
 
-    <label for="confirmPassword">Confirm Password</label>
-    <input
-      type="password"
-      id="confirmPassword"
-      formControlName="confirmPassword"
-      placeholder="Confirm your password"
-    />
-    <br />
+      <!-- Profile Image Field -->
+      <div class="form-group">
+        <label for="profileImage">Profile Image (Optional)</label>
+        <div class="file-upload">
+          <input
+            type="file"
+            id="profileImage"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            class="file-input"
+          />
+          <label for="profileImage" class="file-label">
+            <i class="material-icons">cloud_upload</i>
+            <span>{{ selectedFile ? selectedFile.name : 'Choose a file...' }}</span>
+          </label>
+        </div>
+      </div>
 
-    <!-- <label for="profileImage">Profile Image</label>
-    <input
-      type="file"
-      id="profileImage"
-      (change)="onFileSelected($event)"
-      accept="image/*"
-    />
-    <br /> -->
-    <a routerLink="/user-login"> Have an account? LogIn</a><br />
-    <button type="submit" class="submit-btn">Submit</button>    
-  </form>
+      <button type="submit" class="auth-btn primary" [disabled]="registerForm.invalid">
+        Register
+        <!-- <span *ngIf="loading" class="spinner"></span> -->
+      </button>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a routerLink="/user-login" class="auth-link">Sign in</a></p>
+      </div>
+    </form>
+  </div>
 </div>
