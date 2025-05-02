@@ -13,6 +13,7 @@
    <p><strong>Password:</strong>{{user.password}}</p>
 
     <app-user-update [user]="user" (updated)="handleUpdate($event)"></app-user-update>
+    <app-password-update [user]="user" (updated)="handleUpdate($event)"></app-password-update>
   </div>
     
 </div>  

@@ -13,6 +13,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { HomeComponent } from './components/home/home.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
+import { PasswordUpdateComponent } from './components/password-update/password-update.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserDeleteComponent } from './components/user-delete/user-delete.compon
     UserProfileComponent,
     HomeComponent,
     UserUpdateComponent,
-    UserDeleteComponent
+    UserDeleteComponent,
+    PasswordUpdateComponent
   ],
   imports: [
     BrowserModule,
