@@ -32,6 +32,15 @@ export class PasswordUpdateComponent {
       ? null
       : { mismatch: true };
   }
+
+  showPassword = {
+    new: false,
+    confirm: false
+  };
+  
+  togglePasswordVisibility(field: 'new' | 'confirm') {
+    this.showPassword[field] = !this.showPassword[field];
+  }
   onSubmit() {
     if (this.passwordForm.valid && this.user.id) {
       const newPassword = this.passwordForm.value.newPassword;

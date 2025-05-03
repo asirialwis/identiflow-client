@@ -1,0 +1,182 @@
+/* Profile Container Styles */
+.profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+  
+  /* Profile Header */
+  .profile-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  .profile-title {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Profile Content Layout */
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .profile-content {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+  
+  /* Profile Avatar */
+  .profile-avatar-container {
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #3f51b5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0;
+  }
+  
+  /* Profile Info Section */
+  .profile-info {
+    flex-grow: 1;
+  }
+  
+  .profile-details-list {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-detail-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-detail-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .profile-detail-label {
+    font-weight: 500;
+    color: #2c3e50;
+    min-width: 120px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .profile-detail-value {
+    color: #333;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  /* Status Badge */
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .status-true {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .status-false {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  /* Password Field */
+  .password-mask {
+    letter-spacing: 2px;
+    font-family: monospace;
+  }
+  
+  .password-toggle {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .password-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .password-toggle .material-icons {
+    font-size: 1.25rem;
+    vertical-align: middle;
+  }
+  
+  /* Profile Actions */
+  .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Accessibility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .profile-container {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+    
+    .profile-detail-item {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .profile-detail-label {
+      min-width: 100%;
+    }
+    
+    .profile-actions {
+      flex-direction: column;
+    }
+  }

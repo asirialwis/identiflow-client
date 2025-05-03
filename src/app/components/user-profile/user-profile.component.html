@@ -1,19 +1,63 @@
-<p>user-profile works!</p>
+<div class="profile-container">
+  <header class="profile-header">
+    <h1 class="profile-title">Welcome {{user.username}}</h1>
+  </header>
 
-<div class="user-profile">
-  <h2>User Profile</h2>
-  <div class="profile-image">
-    <img [src]="user.profileImage" alt="Profile Image" />
-  </div>
-  <div class="profile-details">
-    <p><strong>Name:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Phone:</strong> {{ user.mobile }}</p>
-    <p><strong>Status:</strong> {{ user.status }}</p>
-   <p><strong>Password:</strong>{{user.password}}</p>
+  <main class="profile-content">
+    <figure class="profile-avatar-container">
+      <img 
+        [src]="user.profileImage || 'assets/profile.png'" 
+        alt="Profile picture of {{ user.username }}"
+        class="profile-avatar"
+        width="150"
+        height="150"
+      >
+      <figcaption class="visually-hidden">{{ user.username }}'s profile picture</figcaption>
+    </figure>
 
-    <app-user-update [user]="user" (updated)="handleUpdate($event)"></app-user-update>
-    <app-password-update [user]="user" (updated)="handleUpdate($event)"></app-password-update>
-  </div>
-    
-</div>  
+    <section class="profile-info">
+      <h2 class="visually-hidden">User Details</h2>
+      
+      <dl class="profile-details-list">
+        <div class="profile-detail-item">
+          <dt class="profile-detail-label">Name:</dt>
+          <dd class="profile-detail-value">{{ user.username }}</dd>
+        </div>
+        
+        <div class="profile-detail-item">
+          <dt class="profile-detail-label">Email:</dt>
+          <dd class="profile-detail-value">{{ user.email }}</dd>
+        </div>
+        
+        <div class="profile-detail-item">
+          <dt class="profile-detail-label">Phone:</dt>
+          <dd class="profile-detail-value">{{ user.mobile }}</dd>
+        </div>
+        
+        <div class="profile-detail-item">
+          <dt class="profile-detail-label">Status:</dt>
+          <dd class="profile-detail-value">
+            <span class="status-badge" [class]="'status-' + (user.status ? 'true' : 'false').toLowerCase()">
+              {{ user.status }}
+            </span>
+          </dd>
+        </div>
+        
+        <div class="profile-detail-item">
+          <dt class="profile-detail-label">Password:</dt>
+          <dd class="profile-detail-value">
+            <span class="password-mask">••••••••</span>
+            <button type="button" class="password-toggle" aria-label="Reveal password">
+              <i class="material-icons" aria-hidden="true">visibility</i>
+            </button>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="profile-actions">
+        <app-user-update [user]="user" (updated)="handleUpdate($event)"></app-user-update>
+        <app-password-update [user]="user" (updated)="handleUpdate($event)"></app-password-update>
+      </div>
+    </section>
+  </main>
+</div>
