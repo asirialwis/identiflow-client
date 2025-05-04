@@ -1,0 +1,28 @@
+<div class="image-upload-container">
+    <div class="upload-controls">
+      <input 
+        type="file" 
+        #fileInput
+        (change)="onFileSelected($event)" 
+        accept="image/*" 
+        style="display: none;"
+      >
+      <button 
+        type="button" 
+        class="btn btn-outline-primary"
+        (click)="triggerFileInput()"
+      >
+        <i class="material-icons">cloud_upload</i> 
+        <span>{{ fileInput?.files?.[0]?.name || 'Choose a file...' }}</span>
+      </button>
+    </div>
+  
+    <div *ngIf="isUploading" class="upload-status mt-2">
+      <div class="spinner-border spinner-border-sm" role="status"></div>
+      <span class="ms-2">Uploading image...</span>
+    </div>
+  
+    <div *ngIf="uploadError" class="alert alert-danger mt-2">
+      {{ uploadError }}
+    </div>
+  </div>

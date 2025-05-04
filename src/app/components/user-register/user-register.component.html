@@ -6,7 +6,6 @@
     </div>
     
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
-      <!-- Name Field -->
       <div class="form-group">
         <label for="name">Full Name</label>
         <input
@@ -104,29 +103,14 @@
         </div>
       </div>
 
-      <!-- Profile Image Field (Simplified) -->
+      <!-- Profile Image Field -->
       <div class="form-group">
-        <label for="profileImage">Profile Image (Optional)</label>
-        <div class="file-upload">
-          <input
-            type="file"
-            id="profileImage"
-            #fileInput
-            (change)="onFileSelected($event)"
-            accept="image/*"
-            class="file-input"
-          />
-          <label for="profileImage" class="file-label">
-            <i class="material-icons">cloud_upload</i>
-            <span>{{ fileInput?.files?.[0]?.name || 'Choose a file...' }}</span>
-          </label>
-        </div>
-        <button *ngIf="(fileInput?.files?.length ?? 0) > 0" 
-                type="button" 
-                class="btn btn-sm btn-outline-danger mt-2" 
-                (click)="removeImage()">
-          <i class="material-icons">delete</i> Remove
-        </button>
+        <label>Profile Image (Optional)</label>
+        <app-image-upload 
+          [uploadTrigger]="isSubmitting && hasImageSelected"
+          (imageUploaded)="handleImageUpload($event)"
+          (change)="onFileSelected($event)">
+        </app-image-upload>
       </div>
 
       <button type="submit" class="auth-btn primary" [disabled]="registerForm.invalid || isSubmitting">

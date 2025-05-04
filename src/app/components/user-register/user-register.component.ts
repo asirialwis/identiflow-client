@@ -1,7 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { CloudinaryService } from 'src/app/services/cloudinary.service';
 
 @Component({
   selector: 'app-user-register',
@@ -9,15 +8,15 @@ import { CloudinaryService } from 'src/app/services/cloudinary.service';
   styleUrls: ['./user-register.component.css'],
 })
 export class UserRegisterComponent {
-  @ViewChild('fileInput') fileInput!: ElementRef;
   registerForm: FormGroup;
   isSubmitting = false;
-  selectedFile: File | null = null;
+  profileImageUrl: string | null = null;
+  triggerImageUpload = false;
+  hasImageSelected=false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
-    private cloudinaryService: CloudinaryService
+    private userService: UserService
   ) {
     this.registerForm = this.formBuilder.group({
       name: [
@@ -32,9 +31,29 @@ export class UserRegisterComponent {
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      profileImage: [null],
     });
   }
+
+  onImageUploaded(url: string | null) {
+    this.profileImageUrl = url;
+  }
+
+  async onSubmit(): Promise<void> {
+    if (this.registerForm.invalid) {
+      console.log('Form is invalid');
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.triggerImageUpload = true; // This will trigger the image upload
+
+
+    if(!this.hasImageSelected){
+      this.submitForm();
+    }
+  }
+
+  
 
   showPassword = {
     password: false,
@@ -45,42 +64,21 @@ export class UserRegisterComponent {
     this.showPassword[field] = !this.showPassword[field];
   }
 
-  onFileSelected(event: Event) {
+  // Handle the image upload result from child component
+  handleImageUpload(url: string | null): void {
+    this.profileImageUrl = url;
+    this.submitForm();
+  }
+
+  
+
+  onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.selectedFile = input.files?.[0] || null;
+    this.hasImageSelected = !!input.files?.length;
   }
 
-  triggerFileInput() {
-    this.fileInput.nativeElement.click();
-  }
-
-  removeImage() {
-    this.selectedFile = null;
-    this.registerForm.patchValue({ profileImage: null });
-    if (this.fileInput?.nativeElement) {
-      this.fileInput.nativeElement.value = '';
-    }
-  }
-  async onSubmit(): Promise<void> {
-    if (this.registerForm.invalid) {
-      console.log('Form is invalid');
-      return;
-    }
-
-    this.isSubmitting = true;
-    const input = this.fileInput.nativeElement;
-
+  async submitForm(): Promise<void> {
     try {
-      let profileImageUrl = null;
-
-      // Upload image if file was selected
-      if (input.files && input.files.length > 0) {
-        const file = input.files[0];
-        profileImageUrl = await this.cloudinaryService.uploadImage(file);
-        console.log('Image URL:', profileImageUrl);
-        
-      }
-
       const formData: any = {
         username: this.registerForm.value.name,
         email: this.registerForm.value.email,
@@ -88,34 +86,30 @@ export class UserRegisterComponent {
         password: this.registerForm.value.password,
       };
 
-      // Add profile image URL if available
-      if (profileImageUrl) {
-        formData.profileImage = profileImageUrl;
+      if (this.profileImageUrl) {
+        formData.profileImage = this.profileImageUrl;
       }
-
-      console.log('Form data:', formData);
 
       this.userService.registerUser(formData).subscribe({
         next: (res) => {
           console.log('User registered:', res);
           alert('User registered successfully!');
           this.registerForm.reset();
-          input.value = '';
+          this.profileImageUrl = null;
+          this.isSubmitting = false;
         },
         error: (err) => {
           console.error('Registration error:', err);
           alert(
             'Registration failed: ' + (err.error?.message || 'Unknown error')
           );
-        },
-        complete: () => {
           this.isSubmitting = false;
         },
       });
     } catch (error) {
-      console.error('Image upload error:', error);
-      alert('Image upload failed');
+      console.error('Error:', error);
       this.isSubmitting = false;
     }
+    
   }
 }

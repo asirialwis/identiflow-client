@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 import { PasswordUpdateComponent } from './components/password-update/password-update.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PasswordUpdateComponent } from './components/password-update/password-u
     HomeComponent,
     UserUpdateComponent,
     UserDeleteComponent,
-    PasswordUpdateComponent
+    PasswordUpdateComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
