@@ -1,28 +1,48 @@
-<p>user-list works!</p>
-
-<table>
-    <thead>
+<div class="user-list-container">
+    <table>
+      <thead>
         <tr>
-        <th>Profile Image</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Status</th>
-        <th>Account Created At</th>
-        <th>Action</th>
+          <th>Profile Image</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Account Created At</th>
+          <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let user of users">
-        <td><img [src]="user.profileImage" alt="Profile Image" /></td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.mobile }}</td>
-        <td>{{user.status}}</td>
-        <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
-        <td>
-            <app-user-update [user]="user"(updated)="handleUpdate($event)"></app-user-update> 
-        </td>
+          <td>
+            <img [src]="user.profileImage || 'assets/default-avatar.png'" 
+                 alt="{{user.username}}'s profile" 
+                 class="profile-image" />
+          </td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.mobile }}</td>
+          <td>
+            <span [class]="'status-'">
+              {{ user.status }}
+            </span>
+          </td>
+          <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td class="actions">
+            <app-user-update [user]="user" (updated)="handleUpdate($event)"></app-user-update>
+            <button class="delete-btn" (click)="openDeleteDialog(user)">
+              <i class="material-icons">delete</i>
+            </button>
+          </td>
         </tr>
-    </tbody>
-</table>    
+      </tbody>
+    </table>
+  
+    <!-- Delete Confirmation Dialog -->
+    <div *ngIf="showDeleteDialog" class="dialog-overlay">
+      <app-user-delete 
+        [user]="selectedUser" 
+        (deleted)="deleteUser($event)"
+        (canceled)="closeDeleteDialog()">
+      </app-user-delete>
+    </div>
+  </div>

@@ -1,1 +1,12 @@
-<p>user-delete works!</p>
+
+<div class="delete-dialog">
+    <h2>Confirm Deletion</h2>
+    <div class="delete-content">
+      <p>Are you sure you want to delete user <strong>{{user.username}}</strong>?</p>
+      <p>This action cannot be undone.</p>
+    </div>
+    <div class="delete-actions">
+      <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+      <button type="button" class="delete-btn" (click)="onDelete()">Delete</button>
+    </div>
+  </div>
