@@ -1,0 +1,160 @@
+/* Main Container */
+.user-list-container {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin: 2rem auto;
+    max-width: 1200px;
+    overflow-x: auto;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Table Header */
+  thead th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    text-align: left;
+    position: sticky;
+    top: 0;
+  }
+  
+  /* Table Rows and Cells */
+  tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  tbody td {
+    padding: 1rem;
+    vertical-align: middle; /* Ensures content is vertically centered */
+  }
+  
+  /* Profile Image */
+  .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3f51b5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Status Badge */
+  [class^="status-"] {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .status-active {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .status-inactive {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  /* Action Buttons */
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+  }
+  
+  .delete-btn {
+    background: none;
+    border: none;
+    color: #e53935; 
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+  }
+  
+  .delete-btn:hover {
+    background-color: rgba(229, 57, 53, 0.1);
+    transform: scale(1.1); 
+  }
+  
+  .delete-btn .material-icons {
+    font-size: 1.55rem; 
+  }
+  
+  
+  
+  /* Dialog Overlay */
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Hover Effects */
+  tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .user-list-container {
+      padding: 1rem;
+    }
+    
+    thead th, tbody td {
+      padding: 0.75rem;
+    }
+    
+    .profile-image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .user-list-container {
+      padding: 0.5rem;
+    }
+    
+    thead th, tbody td {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .actions {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+
+
+  

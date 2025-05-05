@@ -1,24 +1,12 @@
-<!-- <p>user-update works!</p> -->
 
-<button (click)="openModel()">Update</button>
+
+<button (click)="openModel()"><i class="material-icons">edit</i></button>
 
 <div class="modal" *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
     <span (click)="closeModal()" class="close">&times;</span>
     <h2>Update User</h2>
-    <!-- <form  (ngSubmit)="onSubmit()">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username" required />
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" required />
-      
-      <label for="mobile">Mobile:</label>
-      <input type="text" id="mobile" [(ngModel)]="user.mobile" name="mobile" required />
-      
-      <button type="submit">Update</button>
-    </form> -->
-
+    
 
 
     <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">

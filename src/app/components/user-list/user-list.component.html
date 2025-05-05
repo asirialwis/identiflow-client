@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let user of users">
           <td>
-            <img [src]="user.profileImage || 'assets/default-avatar.png'" 
+            <img [src]="user.profileImage || 'assets/profile.png'" 
                  alt="{{user.username}}'s profile" 
                  class="profile-image" />
           </td>
@@ -25,7 +25,7 @@
             <span [class]="'status-'">
               {{ user.status }}
             </span>
-          </td>
+          </td> 
           <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
           <td class="actions">
             <app-user-update [user]="user" (updated)="handleUpdate($event)"></app-user-update>
