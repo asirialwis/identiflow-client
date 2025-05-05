@@ -35,7 +35,13 @@ export class UserRegisterComponent {
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-    });
+    },
+    { validators:this.passwordMatchValidator});
+  }
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password')?.value === form.get('confirmPassword')?.value
+      ? null
+      : { mismatch: true };
   }
 
   onImageUploaded(url: string | null) {

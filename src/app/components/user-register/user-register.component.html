@@ -97,9 +97,8 @@
             <i class="material-icons">{{ showPassword.confirmPassword ? 'visibility_off' : 'visibility' }}</i>
           </button>
         </div>
-        <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="validation-error">
-          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Please confirm your password</span>
-          <span *ngIf="registerForm.errors?.['mismatch']">Passwords don't match</span>
+        <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.touched" class="validation-error">
+          Passwords do not match.
         </div>
       </div>
 
