@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Register } from 'src/app/interfaces/register';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-login',
@@ -15,7 +16,8 @@ export class UserLoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr:ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,17 +56,17 @@ export class UserLoginComponent {
        
         sessionStorage.setItem('token', res.token);
         console.log(sessionStorage.getItem('token'));
-        alert('User logged in successfully!');
+        this.toastr.success('Login Successfull!','Success');
         this.loginForm.reset();
         this.router.navigate(['/user-profile']);
       },
       error: (err) => {
         if (err.status === 401) {
-          alert('Invalid email or password');
+          this.toastr.error('Invalid email or password','Error')
         } else if (err.status === 403) {
-          alert('Your account is deactivated');
+          this.toastr.error('Your account is deactivated','Error')
         } else {
-          alert('Server error. Please try again later.');
+          this.toastr.error('Server error. Please try again later','Error')
         }
       },
     });

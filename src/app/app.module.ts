@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { UserService } from './services/user.service';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,6 +14,8 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 import { PasswordUpdateComponent } from './components/password-update/password-update.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot({
+      timeOut:3000,
+      positionClass:'toast-top-center',
+      preventDuplicates:true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

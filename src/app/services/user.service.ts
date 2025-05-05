@@ -3,12 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Login,User } from '../interfaces/register';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient , private router:Router) { }
+  constructor(private http: HttpClient , private router:Router , private toastr:ToastrService) { }
 
   //getToken from the session
   getToken() {
@@ -17,7 +18,7 @@ export class UserService {
     }
     else if (!localStorage.getItem('token')) {
       this.router.navigate(['/user-login']);
-      alert('Please login first');
+      this.toastr.warning('Please Login First','Warning')
     }
     return null;
   }

@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/register';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,7 +12,7 @@ export class UserProfileComponent implements OnInit {
   
   user!: User;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService , private toastr:ToastrService){}
 
 
   ngOnInit(): void {
@@ -29,12 +30,12 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateUser(user,user.id).subscribe({
       next:(res)=>{
         console.log('User updated:', res);
-        alert('User updated successfully!');
+        this.toastr.success('Update Successfully!','Success')
         this.ngOnInit(); // Refresh the user list
       }
       ,error:(err)=>{
         console.error('Error updating user:', err);
-        alert('Update failed');
+        this.toastr.error('Update Failed','Error')
       }
     })
   }

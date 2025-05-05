@@ -1,6 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/register';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -10,7 +11,7 @@ import { User } from 'src/app/interfaces/register';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private toastr:ToastrService) {}
 
 
   ngOnInit(): void {
@@ -21,6 +22,7 @@ export class UserListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching users:', err);
+        
       }
     });
   }
@@ -29,12 +31,12 @@ export class UserListComponent implements OnInit {
     this.userService.updateUser(user , user.id).subscribe({
       next: (res) => {
         console.log('User updated:', res);
-        alert('User updated successfully!');
+        this.toastr.success('User updated successfully!','Success')
         this.ngOnInit(); // Refresh the user list
       },
       error: (err) => {
         console.error('Error updating user:', err);
-        alert('Update failed');
+        this.toastr.error('Update failed','Error')
       }
     });
   }
