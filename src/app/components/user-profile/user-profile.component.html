@@ -38,7 +38,7 @@
           <dt class="profile-detail-label">Status:</dt>
           <dd class="profile-detail-value">
             <span class="status-badge" [class]="'status-' + (user.status ? 'true' : 'false').toLowerCase()">
-              {{ user.status }}
+              {{ user.status ? 'Active':'Inactive' }}
             </span>
           </dd>
         </div>

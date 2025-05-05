@@ -22,8 +22,8 @@
           <td>{{ user.email }}</td>
           <td>{{ user.mobile }}</td>
           <td>
-            <span [class]="'status-'">
-              {{ user.status }}
+            <span [class]="user.status ? 'status-active' : 'status-inactive'">
+              {{ user.status ? 'Active':'Inactive' }}
             </span>
           </td> 
           <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
