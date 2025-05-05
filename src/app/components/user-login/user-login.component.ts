@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Register } from 'src/app/interfaces/register';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -17,7 +18,8 @@ export class UserLoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private authService:AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,10 +57,10 @@ export class UserLoginComponent {
       next: (res) => {
        
         sessionStorage.setItem('token', res.token);
-        console.log(sessionStorage.getItem('token'));
+        this.authService.setLoggedIn(true);
         this.toastr.success('Login Successfull!','Success');
         this.loginForm.reset();
-        this.router.navigate(['/user-profile']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         if (err.status === 401) {

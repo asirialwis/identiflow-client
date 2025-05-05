@@ -1,1 +1,60 @@
-<p>home works!</p>
+<div class="home-container">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>User Management System</h1>
+        <p class="subtitle">Streamline your user administration with our comprehensive management solution</p>
+        <div class="cta-buttons">
+          <a routerLink="/user-register" class="btn primary">Get Started</a>
+          <a routerLink="/user-login" class="btn secondary">Login</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/user-mgmt.png" alt="User management illustration">
+      </div>
+    </section>
+  
+    <section class="features-section">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="material-icons">group_add</i>
+          </div>
+          <h3>User Registration</h3>
+          <p>Easily register new users with comprehensive profile management</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="material-icons">list_alt</i>
+          </div>
+          <h3>User Directory</h3>
+          <p>View and manage all users in a clean, organized interface</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="material-icons">admin_panel_settings</i>
+          </div>
+          <h3>Access Control</h3>
+          <p>Manage user status and permissions with ease</p>
+        </div>
+      </div>
+    </section>
+  
+    <section class="stats-section">
+      <div class="stat-item">
+        <!-- <div class="stat-value" *ngIf="userCount > 0">{{userCount}}+</div>
+        <div class="stat-value" *ngIf="userCount === 0">0</div> -->
+        <div class="stat-label">Registered Users</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">System Availability</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Data Security</div>
+      </div>
+    </section>
+  </div>

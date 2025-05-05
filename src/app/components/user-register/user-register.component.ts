@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -18,7 +19,8 @@ export class UserRegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private router:Router
   ) {
     this.registerForm = this.formBuilder.group({
       name: [
@@ -97,6 +99,7 @@ export class UserRegisterComponent {
           console.log('User registered:', res);
           this.toastr.success('Registerd Successfully!','Success');
           this.registerForm.reset();
+          this.router.navigate(['/user-login'])
           this.profileImageUrl = null;
           this.isSubmitting = false;
         },

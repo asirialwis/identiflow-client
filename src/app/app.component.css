@@ -49,6 +49,63 @@
   .nav-item a:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+
+
+
+/* Logout Button Styles */
+.logout-btn {
+  background: none;
+  border: none;
+  color: #f44336; /* Red color for logout action */
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logout-btn:hover {
+  background-color: rgba(244, 67, 54, 0.1); /* Light red background on hover */
+  text-decoration: none;
+}
+
+.logout-btn:active {
+  transform: translateY(1px);
+}
+
+
+
+
+.logout-btn.filled:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+/* To match your nav link styling */
+.nav-item .logout-btn {
+  font-family: inherit;
+  text-transform: none; /* Remove if your links are capitalized */
+  letter-spacing: normal;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logout-btn {
+    padding: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
   
   .active-link {
     background-color: #3f51b5;
