@@ -12,16 +12,18 @@ export class UserService {
   constructor(private http: HttpClient , private router:Router , private toastr:ToastrService) { }
 
   //getToken from the session
-  getToken() {
-    if (sessionStorage.getItem('token')) {
-      return sessionStorage.getItem('token');
-    }
-    else if (!localStorage.getItem('token')) {
+  getToken(): string {
+    const token = sessionStorage.getItem('token');
+  
+    if (!token) {
+      this.toastr.warning('Please Login First', 'Warning');
       this.router.navigate(['/user-login']);
-      this.toastr.warning('Please Login First','Warning')
+      throw new Error('Token not found. User is not authenticated.');
     }
-    return null;
+  
+    return token;
   }
+  
   
   registerUser(data: any): Observable<any> {
     return this.http.post('http://localhost:8080/api/users', data);
@@ -37,7 +39,8 @@ export class UserService {
   }
 
   getUserProfile():Observable<User>{
-    const headers = { Authorization : `Bearer ${this.getToken()}` };
+    const token = this.getToken();
+    const headers = { Authorization : `Bearer ${token}` };
     return this.http.get<User>('http://localhost:8080/api/users/profile',{headers});
   }
 
