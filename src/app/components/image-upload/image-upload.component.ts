@@ -10,7 +10,6 @@ export class ImageUploadComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef;
   @Output() imageUploaded = new EventEmitter<string>();
-  @Output() imageRemoved = new EventEmitter<void>();
   @Input() uploadTrigger: boolean = false;
   
   selectedFile: File | null = null;

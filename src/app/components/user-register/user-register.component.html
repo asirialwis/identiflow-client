@@ -12,7 +12,7 @@
           type="text"
           id="name"
           formControlName="name"
-          placeholder="John Doe"
+          placeholder="your name"
           class="form-control"
           [ngClass]="{ 'invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched }"
         />
@@ -47,7 +47,7 @@
           type="tel"
           id="mobile"
           formControlName="mobile"
-          placeholder="+1 234 567 8900"
+          placeholder="07******45"
           class="form-control"
           [ngClass]="{ 'invalid': registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched }"
         />

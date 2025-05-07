@@ -3,8 +3,7 @@ export interface Register {
     email: string;
     mobile: string;
     password: string;
-    confirmPassword: string;
-    profileImage?:File;
+    profileImage?:String;
     status?:boolean;
 }
 export interface Login {

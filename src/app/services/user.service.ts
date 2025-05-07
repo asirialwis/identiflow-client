@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Login,User } from '../interfaces/register';
+import { Login,User,Register } from '../interfaces/register';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -25,7 +25,7 @@ export class UserService {
   }
   
   
-  registerUser(data: any): Observable<any> {
+  registerUser(data: Register): Observable<any> {
     return this.http.post('http://localhost:8080/api/users', data);
   }
 
