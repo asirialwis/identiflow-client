@@ -1,19 +1,33 @@
 import { AbstractControl } from '@angular/forms';
 
+function isLeapYear(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0) || (year % 4000 === 0);
+}
+
+function getDateFromNIC(year: number, dayOfYear: number): Date {
+  const date = new Date(year, 0); // Jan 1st
+  date.setDate(dayOfYear); // Let JS handle month/day rollover
+  return date;
+}
+
 export function nicDobMatchValidator(control: AbstractControl) {
   const nic = control.get('nic')?.value;
   const dobControl = control.get('dob');
 
   if (!nic || nic.length < 7 || !dobControl?.value) return null;
-  //200107101865
-  const year = parseInt(nic.substring(0, 4), 10); //2001
-  let dayOfYear = parseInt(nic.substring(4, 7), 10); //071
-  if (dayOfYear > 500) dayOfYear -= 500; // female
 
-  const dobFromNIC = new Date(year, 0);
+  const year = parseInt(nic.substring(0, 4), 10);
+  let dayOfYear = parseInt(nic.substring(4, 7), 10);
 
-  dobFromNIC.setDate(dayOfYear - 1);
+  if (dayOfYear > 500) dayOfYear -= 500;
 
+  // Validate dayOfYear range
+  const maxDays = isLeapYear(year) ? 366 : 365;
+  if (dayOfYear < 1 || dayOfYear > maxDays) {
+    return { invalidNIC: true };
+  }
+
+  const dobFromNIC = getDateFromNIC(year, dayOfYear-1);
   const enteredDOB = new Date(dobControl.value);
 
   const match =
