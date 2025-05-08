@@ -45,12 +45,15 @@ export class UserService {
   }
 
   updateUser(data:User,id:number):Observable<User>{
-    console.log(id);
-    return this.http.put<User>(`http://localhost:8080/api/users/${id}`,data);
+    const token = this.getToken();
+    const headers = { Authorization : `Bearer ${token}` };
+    return this.http.put<User>(`http://localhost:8080/api/users/${id}`,data,{headers});
   }
   
   deleteUser(id:number):Observable<User>{
-    return this.http.delete<User>(`http://localhost:8080/api/users/${id}`);
+    const token = this.getToken();
+    const headers = { Authorization : `Bearer ${token}` };
+    return this.http.delete<User>(`http://localhost:8080/api/users/${id}`,{headers});
   }
   
 }
