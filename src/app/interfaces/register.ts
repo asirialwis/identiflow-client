@@ -1,6 +1,7 @@
 export interface Register {
     username: string;
     email: string;
+    nic:string;
     mobile: string;
     password: string;
     profileImage?:String;
@@ -15,6 +16,7 @@ export interface User{
     id: number;
     username: string;
     email: string;
+    nic?:string;
     mobile: string;
     password?: string;
     profileImage?:File;

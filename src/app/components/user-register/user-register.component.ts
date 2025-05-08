@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { nicDobMatchValidator } from '../../validators/dob.validator';
+
 
 @Component({
   selector: 'app-user-register',
@@ -14,29 +16,33 @@ export class UserRegisterComponent {
   isSubmitting = false;
   profileImageUrl: string | null = null;
   triggerImageUpload = false;
-  hasImageSelected=false;
+  hasImageSelected = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastr:ToastrService,
-    private router:Router
+    private toastr: ToastrService,
+    private router: Router
   ) {
-    this.registerForm = this.formBuilder.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
+    this.registerForm = this.formBuilder.group(
+      {
+        name: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(20),
+          ],
         ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-    },
-    { validators:this.passwordMatchValidator});
+        email: ['', [Validators.required, Validators.email]],
+        nic: ['', [Validators.required, Validators.pattern('^[0-9]{12}$')]],
+        dob: ['', Validators.required],
+        mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: [this.passwordMatchValidator, nicDobMatchValidator] }
+    );
   }
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
@@ -57,13 +63,10 @@ export class UserRegisterComponent {
     this.isSubmitting = true;
     this.triggerImageUpload = true; // This will trigger the image upload
 
-
-    if(!this.hasImageSelected){
+    if (!this.hasImageSelected) {
       this.submitForm();
     }
   }
-
-  
 
   showPassword = {
     password: false,
@@ -80,8 +83,6 @@ export class UserRegisterComponent {
     this.submitForm();
   }
 
-  
-
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.hasImageSelected = !!input.files?.length;
@@ -92,6 +93,7 @@ export class UserRegisterComponent {
       const formData: any = {
         username: this.registerForm.value.name,
         email: this.registerForm.value.email,
+        nic:this.registerForm.value.nic,
         mobile: this.registerForm.value.mobile,
         password: this.registerForm.value.password,
       };
@@ -103,9 +105,9 @@ export class UserRegisterComponent {
       this.userService.registerUser(formData).subscribe({
         next: (res) => {
           console.log('User registered:', res);
-          this.toastr.success('Registerd Successfully!','Success');
+          this.toastr.success('Registerd Successfully!', 'Success');
           this.registerForm.reset();
-          this.router.navigate(['/user-login'])
+          this.router.navigate(['/user-login']);
           this.profileImageUrl = null;
           this.isSubmitting = false;
         },
@@ -121,6 +123,5 @@ export class UserRegisterComponent {
       console.error('Error:', error);
       this.isSubmitting = false;
     }
-    
   }
 }
