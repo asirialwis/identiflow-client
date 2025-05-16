@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './password-update.component.html',
   styleUrls: ['./password-update.component.css'],
 })
-export class PasswordUpdateComponent {
+export class  PasswordUpdateComponent {
   @Input() user!: any;
   @Output() updated = new EventEmitter<any>();
   passwordForm!: FormGroup;

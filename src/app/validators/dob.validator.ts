@@ -1,12 +1,12 @@
 import { AbstractControl } from '@angular/forms';
 
 function isLeapYear(year: number): boolean {
-  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0) || (year % 4000 === 0);
+  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0) 
 }
 
 function getDateFromNIC(year: number, dayOfYear: number): Date {
   const date = new Date(year, 0); // Jan 1st
-  date.setDate(dayOfYear); // Let JS handle month/day rollover
+  date.setDate(dayOfYear); 
   return date;
 }
 

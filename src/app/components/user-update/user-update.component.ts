@@ -36,6 +36,9 @@ export class UserUpdateComponent {
         ...this.user,
         ...this.updateForm.value
       }
+      //remove password because its not update from the user list
+      delete updatedUser.password;
+      console.log("Updated user without password",updatedUser);
       this.updated.emit(updatedUser);
       this.isModalOpen = false;
     }
